@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Cuestionario</title>
+		<meta charset="utf-8" >
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body class="no-sidebar">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header">
+
+					<!-- Inner -->
+						<div class="inner">
+							<header>
+								<h1><a href="home.html" id="logo">Cuestionario</a></h1>
+							</header>
+						</div>
+
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li><a href="index.html">Home</a></li>
+								<li>
+									<a href="#">Temas</a>
+									<ul>
+										<li><a href="diseno.html">3. Dise&ntilde;o del software</a></li>
+										<li><a href="fundamentos.html">3.1 Fundamentos para el dise&ntilde;o de software</a></li>
+										<li><a href="conceptos.html">3.1.1 Conceptos generales del dise&ntilde;o</a></li>
+										<li><a href="contexto.html">3.1.2 El contexto del dise&ntilde;o del software</a></li>
+									</ul>
+								</li>
+								<li><a href="audioyVid.html">Audio y Video</a></li>
+								<li><a href="resumen.html">Resumen</a></li>
+								<li><a href="cuestionario.html">Cuestionario</a></li>
+							</ul>
+						</nav>
+
+				</div>
+
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"></a></h2>
+							</header>
+						</article>
+						<hr />
+						<!--No debe haber ninguna modificacion de aqui en adelante, recuerda que todo se trabajara sobre la carpeta js y el archivo preguntas-->
+					<font=4>
+					<script type="text/javascript" src="assets/js/preguntas.js"></script>
+
+					<script type="text/javascript">
+					var total=3;
+					var correctas=0;
+					var promedio=0;
+					var entrar=new Array;
+					var examen=[];
+
+
+					function examenAleatorio(){
+						total=10;
+						var cont=0;
+						var indice=0;
+						
+						while(cont<total){
+							
+							indice=Math.floor(Math.random()*preguntas.length);
+							
+							if (!preguntas[indice].ocupado){
+								
+								preguntas[indice].ocupado=true;
+								examen[cont]=preguntas[indice];
+								
+								cont++;
+								}						
+							}						
+						}
+
+
+
+					function valua(indice,resp){
+
+
+						
+						if (examen[indice].correcta== resp){ 
+							if(!entrar[indice]){
+							entrar[indice]=1;	
+							correctas++;
+							}
+							
+							document.getElementById('resp' + (indice)).innerHTML = ''/*'<span class="bien">Respuestas Correctas&nbsp;'+correctas+'  </span>'*/;	
+							
+							}else{
+								if(!entrar[indice]){
+								entrar[indice]=1;	
+								
+								}
+								
+						document.getElementById('resp' + (indice)).innerHTML = '' /*'<span class="mal">Respuesta Incorrecta&nbsp; </span>'*/;	
+								
+								}
+						
+						}
+						
+						
+					function notaFinal() {
+					promedio=correctas/total;	
+					promedio*=10;	
+						document.getElementById('puntuacionfinal').innerHTML = '<span class="notas"><center>Calificaci&oacute;n: &nbsp;'+promedio+'</center></span>';
+					if(promedio < 6.0)
+					{
+						document.getElementById('puntuacionfinal').innerHTML = '<span class="notas"><center>Reprobaste, pero puedes volver a intentarlo. Calificaci&oacute;n: &nbsp;'+promedio+'</center></span>';
+					}
+					}
+
+					</script>
+
+
+					<link href="js/stylep.css" rel="stylesheet" type="text/css">
+					</head>
+
+
+					<script language="javascript" type="text/javascript">
+					   function unoOn(){
+									
+									document.getElementById("Uno").style.visibility="visible";		
+									//$("#Uno").hide().css({visibility: "visible"}).fadeIn("slow");	
+									// $('#Uno').css('visibility','visible').hide().fadeIn('slow');
+						}
+						function unoOut(){
+									document.getElementById("Uno").style.visibility="hidden";
+									//$("#navigationcontainer").fadeTo("slow",0.6);
+									//$('#Uno').css('visibility','hidden').hide().fadeIn('slow');
+						}
+						
+						function dosOn(){
+									document.getElementById("Dos").style.visibility="visible";
+									//$("#Dos").delay(500).fadeTo("slow", 0.6);
+						}
+						function dosOut(){
+									document.getElementById("Dos").style.visibility="hidden";
+						}
+						function tresOn(){
+									document.getElementById("Tres").style.visibility="visible";
+						}
+						function tresOut(){
+									document.getElementById("Tres").style.visibility="hidden";
+						}
+						function cuatroOn(){
+									document.getElementById("Cuatro").style.visibility="visible";
+						}
+						function cuatroOut(){
+									document.getElementById("Cuatro").style.visibility="hidden";
+						}
+					</script>
+
+
+
+					</head>
+
+
+								
+								<script type="text/javascript" >
+					examenAleatorio();
+						
+					for(i=0;i<total;i++){
+
+
+					document.write("<div class='numero'  ><br><p style='font-size:30px; font-family:'Comic Sans MS', cursive;'>"+ parseInt(i+1)+"<p></div>");	
+					document.write("<div class='pregunta'>");
+					document.write("<left>"+examen[i].pregun+"</left>");//examen[i].pregunta
+					document.write("<div id='resp"+i+"'>&nbsp;</div>");
+					document.write("<td><left><input id='uno' type=radio name='cadena"+i+"' value='0' onClick=valua("+i+",this.value) />"+examen[i].respuestas[0] +"</left> </td>");
+					document.write("<td><left><br><input id='dos' type=radio name='cadena"+i+"' value='1' onClick=valua("+i+",this.value) />"+examen[i].respuestas[1] +"</left></td></tr><tr>");
+					document.write("<td><left><br><input id='tres' type=radio name='cadena"+i+"' value='2' onClick=valua("+i+",this.value) />"+examen[i].respuestas[2] +"</left></td>");
+					document.write("<td><left><br><input  id='cuatro'type=radio name='cadena"+i+"' value='3' onClick=valua("+i+",this.value) />"+examen[i].respuestas[3] +"</left</td></tr>");
+
+
+					document.write("</table></div>");
+
+						}	
+						
+						
+
+
+					</script>
+					
+					<center>
+					<footer>
+					<input class="button style2 scrolly" value="Revisar" onclick="notaFinal()"/>
+					<div id="puntuacionfinal"><center>&nbsp;</center></div><div id="notafinal">&nbsp;</div>
+					</footer>
+					</center>			
+					<center>
+					<footer>
+					<a href="cuestionario.html" class="button style2 scrolly">Intenta de Nuevo</a>
+					
+					<a href="home.html" class="button style2 scrolly">Inicio</a>	
+					</footer>
+					<div class="wrapper style1">
+						<div class="container">
+						<div class="row">
+							<article class="4u 12u(mobile) special">
+								<a href="#" class="image featured"><img src="images/pic07.jpg" alt="" /></a>
+							</article>
+							<article class="4u 12u(mobile) special">
+								<a href="#" class="image featured"><img src="images/pic08.jpg" alt="" /></a>
+							</article>
+							<article class="4u 12u(mobile) special">
+								<a href="#" class="image featured"><img src="images/pic09.jpg" alt="" /></a>
+							</article>
+						</div>
+						</div>
+					</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.onvisible.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
